@@ -190,6 +190,7 @@ const copy: Record<
 
 export default function HomePage() {
   const [language, setLanguage] = useState<Lang>('en');
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('agrilink-lang') as Lang | null;
@@ -204,6 +205,13 @@ export default function HomePage() {
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
   }, [language]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const t = useMemo(() => copy[language], [language]);
   const rtl = language === 'ar';
   const metricIcons = [BadgeCheck, Handshake, Truck, Globe];
@@ -217,12 +225,22 @@ export default function HomePage() {
       <section
         className="relative min-h-[92vh] border-b border-[#d9e3ec]"
         style={{
-          backgroundImage: `linear-gradient(90deg, rgba(1,40,67,0.84) 0%, rgba(1,40,67,0.72) 40%, rgba(1,40,67,0.45) 66%, rgba(1,40,67,0.24) 100%), url(${heroImage})`,
+          backgroundImage: `linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.6)), linear-gradient(100deg, rgba(1,40,67,0.84) 0%, rgba(1,40,67,0.76) 38%, rgba(1,40,67,0.56) 68%, rgba(1,40,67,0.34) 100%), url(${heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
       >
-        <header className="sticky top-0 z-20 border-b border-[#d8e1ea] bg-[#fcfdff]/90 px-4 py-3 backdrop-blur-xl sm:px-8 lg:px-14">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,0,0,0.08)_45%,rgba(0,0,0,0.45)_100%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_16%,rgba(255,255,255,0.1),transparent_28%),radial-gradient(circle_at_78%_78%,rgba(255,49,49,0.14),transparent_34%)]" />
+        <div className="pointer-events-none absolute inset-0 backdrop-blur-[1.6px]" />
+
+        <header
+          className={`sticky top-0 z-20 border-b px-4 py-3 backdrop-blur-xl transition-all duration-300 sm:px-8 lg:px-14 ${
+            scrolled
+              ? 'border-[#cfd9e3] bg-[#fcfdff]/84 shadow-[0_8px_24px_rgba(1,40,67,0.14)]'
+              : 'border-[#d8e1ea]/70 bg-[#fcfdff]/76'
+          }`}
+        >
           <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <Link href="/" className="flex items-center gap-3">
@@ -235,26 +253,35 @@ export default function HomePage() {
             </Link>
 
             <nav className="hidden items-center gap-7 text-sm font-medium text-[#567087] lg:flex">
-              <a href="#value" className="transition-colors hover:text-[#012843]">{t.nav.value}</a>
-              <a href="#how" className="transition-colors hover:text-[#012843]">{t.nav.howItWorks}</a>
-              <a href="#preview" className="transition-colors hover:text-[#012843]">{t.nav.product}</a>
+              <a href="#value" className="relative transition-colors hover:text-[#012843] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#ff3131] after:transition-all hover:after:w-full">{t.nav.value}</a>
+              <a href="#how" className="relative transition-colors hover:text-[#012843] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#ff3131] after:transition-all hover:after:w-full">{t.nav.howItWorks}</a>
+              <a href="#preview" className="relative transition-colors hover:text-[#012843] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#ff3131] after:transition-all hover:after:w-full">{t.nav.product}</a>
             </nav>
 
             <div className="flex items-center gap-2 sm:gap-3">
-              <select
-                id="language-selector"
-                value={language}
-                onChange={(e) => setLanguage(e.target.value as Lang)}
-                className="rounded-xl border border-[#d2dce6] bg-white px-2 py-2 text-sm font-medium text-[#012843] outline-none focus:ring-2 focus:ring-[#012843]/20"
+              <div
+                role="tablist"
                 aria-label={t.nav.language}
+                className="inline-flex rounded-xl border border-[#d0dbe6] bg-white/88 p-1 shadow-[0_6px_16px_rgba(1,40,67,0.08)]"
               >
-                <option value="en">EN</option>
-                <option value="fr">FR</option>
-                <option value="ar">AR</option>
-              </select>
+                {(['en', 'fr', 'ar'] as Lang[]).map((lang) => (
+                  <button
+                    key={lang}
+                    type="button"
+                    onClick={() => setLanguage(lang)}
+                    className={`rounded-lg px-2.5 py-1.5 text-xs font-semibold uppercase tracking-wide transition-all duration-200 ${
+                      language === lang
+                        ? 'bg-[#012843] text-white shadow-[0_6px_12px_rgba(1,40,67,0.24)]'
+                        : 'text-[#4f697f] hover:bg-[#eef3f8] hover:text-[#012843]'
+                    }`}
+                  >
+                    {lang}
+                  </button>
+                ))}
+              </div>
               <Link
                 href="/register"
-                className="inline-flex items-center rounded-xl bg-[#ff3131] px-4 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(255,49,49,0.32)] transition hover:brightness-95"
+                className="inline-flex items-center rounded-xl bg-[#ff3131] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(255,49,49,0.34)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95"
               >
                 {t.nav.register}
               </Link>
@@ -263,46 +290,46 @@ export default function HomePage() {
           </div>
         </header>
 
-        <div className="mx-auto w-full max-w-7xl px-6 pb-20 pt-16 sm:px-10 lg:px-14">
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-24 pt-18 sm:px-10 lg:px-14">
           <div id="value" className={`max-w-3xl ${rtl ? 'text-right' : 'text-left'}`}>
             <span className="inline-flex rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white/90">
               {t.hero.badge}
             </span>
 
-            <h1 className="mt-5 text-4xl font-black leading-[1.05] text-white sm:text-6xl">
+            <h1 className={`mt-6 text-white drop-shadow-[0_10px_24px_rgba(0,0,0,0.35)] ${rtl ? 'text-4xl font-extrabold leading-[1.15] sm:text-6xl' : 'text-4xl font-black leading-[1.04] sm:text-6xl'}`}>
               {t.hero.title}
             </h1>
 
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+            <p className={`mt-5 max-w-2xl text-white/78 ${rtl ? 'text-base leading-8 sm:text-lg' : 'text-base leading-relaxed sm:text-lg'}`}>
               {t.hero.subtitle}
             </p>
 
-            <div className={`mt-8 flex flex-wrap gap-4 ${rtl ? 'justify-end' : 'justify-start'}`}>
+            <div className={`mt-9 flex flex-wrap gap-4 ${rtl ? 'justify-end' : 'justify-start'}`}>
               <Link
                 href="/login"
-                className="rounded-xl bg-[#ff3131] px-6 py-3 text-sm font-bold text-white shadow-[0_16px_28px_rgba(255,49,49,0.35)] transition hover:-translate-y-0.5"
+                className="rounded-xl bg-[#ff3131] px-7 py-3.5 text-sm font-bold text-white shadow-[0_18px_30px_rgba(255,49,49,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_34px_rgba(255,49,49,0.42)]"
               >
                 {t.hero.ctaPrimary}
               </Link>
               <Link
                 href="/register"
-                className="rounded-xl border border-white/35 bg-white/10 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-white/20"
+                className="rounded-xl border border-white/30 bg-white/[0.13] px-7 py-3.5 text-sm font-bold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/[0.18]"
               >
                 {t.hero.ctaSecondary}
               </Link>
             </div>
 
-            <div id="how" className={`mt-10 grid gap-3 sm:grid-cols-3 ${rtl ? 'text-right' : 'text-left'}`}>
+            <div id="how" className={`mt-12 grid gap-4 sm:grid-cols-3 ${rtl ? 'text-right' : 'text-left'}`}>
               {t.trust.map((item, index) => {
                 const Icon = metricIcons[index] || BadgeCheck;
                 return (
-                  <div key={item.label} className="rounded-2xl border border-white/20 bg-white/12 p-4 backdrop-blur-sm">
-                    <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-white">
+                  <div key={item.label} className="rounded-2xl border border-white/18 bg-white/[0.1] p-5 shadow-[0_8px_32px_rgba(0,0,0,0.18)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/[0.14]">
+                    <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-white/18 text-white">
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
                       <p className="text-2xl font-black text-white">{item.value}</p>
-                      <p className="text-xs text-white/75">{item.label}</p>
+                      <p className="mt-1 text-xs text-white/78">{item.label}</p>
                     </div>
                   </div>
                 );
