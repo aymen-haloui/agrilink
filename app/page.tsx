@@ -11,6 +11,8 @@ const copy: Record<
     nav: {
       product: string;
       pricing: string;
+      signIn: string;
+      register: string;
       language: string;
     };
     hero: {
@@ -30,6 +32,8 @@ const copy: Record<
     nav: {
       product: 'Marketplace',
       pricing: 'Solutions',
+      signIn: 'Sign In',
+      register: 'Register',
       language: 'Language',
     },
     hero: {
@@ -66,6 +70,8 @@ const copy: Record<
     nav: {
       product: 'Marketplace',
       pricing: 'Solutions',
+      signIn: 'Se connecter',
+      register: 'Inscription',
       language: 'Langue',
     },
     hero: {
@@ -102,6 +108,8 @@ const copy: Record<
     nav: {
       product: 'السوق',
       pricing: 'الحلول',
+      signIn: 'تسجيل الدخول',
+      register: 'إنشاء حساب',
       language: 'اللغة',
     },
     hero: {
@@ -156,32 +164,44 @@ export default function HomePage() {
   const rtl = language === 'ar';
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#f3f1e7] text-[#0f2419]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.8),transparent_38%),radial-gradient(circle_at_80%_15%,rgba(18,92,67,0.2),transparent_32%),radial-gradient(circle_at_85%_80%,rgba(214,154,48,0.18),transparent_28%)]" />
+    <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(252,253,255,0.95),transparent_38%),radial-gradient(circle_at_80%_15%,rgba(1,40,67,0.12),transparent_32%),radial-gradient(circle_at_85%_80%,rgba(255,49,49,0.12),transparent_28%)]" />
 
       <section className="relative mx-auto flex w-full max-w-7xl flex-col px-6 pb-12 pt-8 sm:px-10 lg:px-14">
-        <header className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#1d503b]/20 bg-white/80 px-5 py-3 backdrop-blur-sm">
+        <header className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-border bg-card/85 px-5 py-3 backdrop-blur-sm">
           <div className="flex items-center gap-3">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#145742] text-sm font-black text-white">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-black text-primary-foreground">
               AG
             </div>
             <div>
               <p className="text-base font-extrabold tracking-wide">Agrilink</p>
-              <p className="text-xs text-[#4f6b60]">B2B Agricultural Network</p>
+              <p className="text-xs text-muted-foreground">B2B Agricultural Network</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 sm:gap-5">
-            <span className="hidden text-sm text-[#315447] sm:inline">{t.nav.product}</span>
-            <span className="hidden text-sm text-[#315447] sm:inline">{t.nav.pricing}</span>
-            <label className="text-sm font-semibold text-[#315447]" htmlFor="language-selector">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <span className="hidden text-sm text-muted-foreground sm:inline">{t.nav.product}</span>
+            <span className="hidden text-sm text-muted-foreground sm:inline">{t.nav.pricing}</span>
+            <Link
+              href="/login"
+              className="rounded-lg border border-border bg-background px-3 py-1.5 text-sm font-semibold text-foreground transition hover:bg-muted"
+            >
+              {t.nav.signIn}
+            </Link>
+            <Link
+              href="/register"
+              className="rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+            >
+              {t.nav.register}
+            </Link>
+            <label className="hidden text-sm font-semibold text-muted-foreground sm:inline" htmlFor="language-selector">
               {t.nav.language}
             </label>
             <select
               id="language-selector"
               value={language}
               onChange={(e) => setLanguage(e.target.value as Lang)}
-              className="rounded-lg border border-[#1d503b]/25 bg-white px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-[#145742]/30"
+              className="rounded-lg border border-input bg-background px-2 py-1 text-sm outline-none focus:ring-2 focus:ring-ring/40"
             >
               <option value="en">EN</option>
               <option value="fr">FR</option>
@@ -191,29 +211,29 @@ export default function HomePage() {
         </header>
 
         <div className={`mt-10 grid items-start gap-8 lg:grid-cols-[1.2fr,0.8fr] ${rtl ? 'text-right' : 'text-left'}`}>
-          <div className="rounded-3xl border border-[#1d503b]/15 bg-white/90 p-7 shadow-[0_10px_50px_rgba(16,69,50,0.1)] sm:p-10">
-            <span className="inline-flex rounded-full bg-[#145742]/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#145742]">
+          <div className="rounded-3xl border border-border bg-card/95 p-7 shadow-[0_14px_50px_rgba(1,40,67,0.14)] sm:p-10">
+            <span className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary">
               {t.hero.badge}
             </span>
 
-            <h1 className="mt-5 text-4xl font-black leading-tight text-[#103a2a] sm:text-5xl">
+            <h1 className="mt-5 text-4xl font-black leading-tight text-foreground sm:text-5xl">
               {t.hero.title}
             </h1>
 
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#2d4f42] sm:text-lg">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               {t.hero.subtitle}
             </p>
 
             <div className={`mt-8 flex flex-wrap gap-3 ${rtl ? 'justify-end' : 'justify-start'}`}>
               <Link
                 href="/dashboard"
-                className="rounded-xl bg-[#145742] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#103f31]"
+                className="rounded-xl bg-primary px-5 py-3 text-sm font-bold text-primary-foreground transition hover:opacity-90"
               >
                 {t.hero.ctaPrimary}
               </Link>
               <Link
                 href="/login"
-                className="rounded-xl border border-[#145742]/25 bg-white px-5 py-3 text-sm font-bold text-[#145742] transition hover:bg-[#145742]/5"
+                className="rounded-xl border border-border bg-background px-5 py-3 text-sm font-bold text-foreground transition hover:bg-muted"
               >
                 {t.hero.ctaSecondary}
               </Link>
@@ -224,31 +244,31 @@ export default function HomePage() {
             {t.stats.map((item) => (
               <div
                 key={item.label}
-                className="rounded-2xl border border-[#1d503b]/15 bg-[#145742] p-5 text-white shadow-[0_8px_30px_rgba(16,69,50,0.25)]"
+                className="rounded-2xl border border-border bg-accent p-5 text-accent-foreground shadow-[0_10px_24px_rgba(1,40,67,0.2)]"
               >
                 <p className="text-3xl font-black">{item.value}</p>
-                <p className="mt-1 text-sm text-[#daf0e6]">{item.label}</p>
+                <p className="mt-1 text-sm text-accent-foreground/80">{item.label}</p>
               </div>
             ))}
           </aside>
         </div>
 
         <section className={`mt-10 ${rtl ? 'text-right' : 'text-left'}`}>
-          <h2 className="text-2xl font-black text-[#103a2a]">{t.featuresTitle}</h2>
+          <h2 className="text-2xl font-black text-foreground">{t.featuresTitle}</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             {t.features.map((feature) => (
               <article
                 key={feature.title}
-                className="rounded-2xl border border-[#1d503b]/15 bg-white/90 p-5"
+                className="rounded-2xl border border-border bg-card/95 p-5"
               >
-                <h3 className="text-base font-extrabold text-[#103a2a]">{feature.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#335347]">{feature.description}</p>
+                <h3 className="text-base font-extrabold text-foreground">{feature.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <footer className="mt-10 border-t border-[#1d503b]/20 pt-5 text-sm text-[#456257]">
+        <footer className="mt-10 border-t border-border pt-5 text-sm text-muted-foreground">
           {t.footer}
         </footer>
       </section>
