@@ -1,0 +1,24 @@
+{
+  "title": "Orders",
+  "createOrder": "Create Order",
+  "orderNumber": "Order #",
+  "status": "Status",
+  "supplier": "Supplier",
+  "buyer": "Buyer",
+  "amount": "Total Amount",
+  "date": "Order Date",
+  "actions": "Actions",
+  "viewDetails": "View Details",
+  "noOrders": "No orders found",
+  "statuses": {
+    "pending": "Pending",
+    "confirmed": "Confirmed",
+    "shipped": "Shipped",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled",
+    "returned": "Returned"
+  },
+  "estimatedDelivery": "Estimated Delivery",
+  "trackingNumber": "Tracking Number",
+  "deliveryAddress": "Delivery Address"
+}

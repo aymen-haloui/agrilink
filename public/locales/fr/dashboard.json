@@ -1,0 +1,17 @@
+{
+  "title": "Tableau de bord",
+  "welcome": "Bienvenue",
+  "stats": {
+    "totalOrders": "Total des commandes",
+    "totalRevenue": "Chiffre d'affaires total",
+    "successRate": "Taux de réussite",
+    "pendingOrders": "Commandes en attente",
+    "activeProducts": "Produits actifs",
+    "avgOrderValue": "Valeur moyenne des commandes"
+  },
+  "recentOrders": "Commandes récentes",
+  "topProducts": "Meilleurs produits",
+  "performanceMetrics": "Indicateurs de performance",
+  "userManagement": "Gestion des utilisateurs",
+  "auditLog": "Journal d'audit"
+}

@@ -1,0 +1,40 @@
+{
+  "header": {
+    "home": "الرئيسية",
+    "products": "المنتجات",
+    "orders": "الطلبات",
+    "dashboard": "لوحة التحكم",
+    "profile": "الملف الشخصي",
+    "notifications": "الإشعارات",
+    "logout": "تسجيل الخروج",
+    "language": "اللغة"
+  },
+  "footer": {
+    "about": "حول",
+    "contact": "اتصل بنا",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "copyright": "جميع الحقوق محفوظة"
+  },
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تحرير",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجاح",
+    "warning": "تحذير",
+    "info": "معلومات",
+    "confirm": "تأكيد",
+    "close": "إغلاق",
+    "search": "بحث",
+    "filter": "تصفية",
+    "sort": "ترتيب",
+    "export": "تصدير",
+    "import": "استيراد"
+  }
+}

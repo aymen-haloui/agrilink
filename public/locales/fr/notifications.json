@@ -1,0 +1,18 @@
+{
+  "title": "Notifications",
+  "markAsRead": "Marquer comme lu",
+  "markAllAsRead": "Tout marquer comme lu",
+  "delete": "Supprimer",
+  "noNotifications": "Aucune notification",
+  "types": {
+    "orderCreated": "Commande créée",
+    "orderConfirmed": "Commande confirmée",
+    "orderShipped": "Commande expédiée",
+    "orderDelivered": "Commande livrée",
+    "paymentReceived": "Paiement reçu",
+    "paymentFailed": "Échec du paiement",
+    "reviewReceived": "Nouvel avis",
+    "ratingReceived": "Nouvelle évaluation",
+    "disputeOpened": "Litige ouvert"
+  }
+}

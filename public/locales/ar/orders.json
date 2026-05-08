@@ -1,0 +1,24 @@
+{
+  "title": "الطلبات",
+  "createOrder": "إنشاء طلب",
+  "orderNumber": "رقم الطلب #",
+  "status": "الحالة",
+  "supplier": "المورد",
+  "buyer": "المشتري",
+  "amount": "الإجمالي",
+  "date": "تاريخ الطلب",
+  "actions": "الإجراءات",
+  "viewDetails": "عرض التفاصيل",
+  "noOrders": "لم يتم العثور على طلبات",
+  "statuses": {
+    "pending": "قيد الانتظار",
+    "confirmed": "مؤكد",
+    "shipped": "تم الشحن",
+    "delivered": "تم التسليم",
+    "cancelled": "ملغي",
+    "returned": "مسترجع"
+  },
+  "estimatedDelivery": "التسليم المتوقع",
+  "trackingNumber": "رقم التتبع",
+  "deliveryAddress": "عنوان التسليم"
+}

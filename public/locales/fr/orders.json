@@ -1,0 +1,24 @@
+{
+  "title": "Commandes",
+  "createOrder": "Créer une commande",
+  "orderNumber": "Commande #",
+  "status": "Statut",
+  "supplier": "Fournisseur",
+  "buyer": "Acheteur",
+  "amount": "Montant total",
+  "date": "Date de commande",
+  "actions": "Actions",
+  "viewDetails": "Voir les détails",
+  "noOrders": "Aucune commande trouvée",
+  "statuses": {
+    "pending": "En attente",
+    "confirmed": "Confirmée",
+    "shipped": "Expédiée",
+    "delivered": "Livrée",
+    "cancelled": "Annulée",
+    "returned": "Retournée"
+  },
+  "estimatedDelivery": "Livraison prévue",
+  "trackingNumber": "Numéro de suivi",
+  "deliveryAddress": "Adresse de livraison"
+}

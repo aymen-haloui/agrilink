@@ -1,0 +1,24 @@
+{
+  "title": "Produits",
+  "addProduct": "Ajouter un produit",
+  "editProduct": "Modifier le produit",
+  "deleteProduct": "Supprimer le produit",
+  "name": "Nom du produit",
+  "description": "Description",
+  "category": "Catégorie",
+  "price": "Prix",
+  "stock": "Stock",
+  "minOrder": "Commande minimum",
+  "sku": "SKU",
+  "status": "Statut",
+  "actions": "Actions",
+  "viewDetails": "Voir les détails",
+  "noProducts": "Aucun produit trouvé",
+  "categories": {
+    "agriculture": "Agriculture",
+    "textiles": "Textiles",
+    "metals": "Métaux",
+    "chemicals": "Produits chimiques",
+    "machinery": "Machinerie"
+  }
+}

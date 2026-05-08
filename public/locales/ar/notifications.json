@@ -1,0 +1,18 @@
+{
+  "title": "الإشعارات",
+  "markAsRead": "وضع علامة كمقروءة",
+  "markAllAsRead": "وضع علامة على الكل كمقروء",
+  "delete": "حذف",
+  "noNotifications": "لا توجد إشعارات",
+  "types": {
+    "orderCreated": "تم إنشاء الطلب",
+    "orderConfirmed": "تم تأكيد الطلب",
+    "orderShipped": "تم شحن الطلب",
+    "orderDelivered": "تم تسليم الطلب",
+    "paymentReceived": "تم استقبال الدفع",
+    "paymentFailed": "فشل الدفع",
+    "reviewReceived": "مراجعة جديدة",
+    "ratingReceived": "تقييم جديد",
+    "disputeOpened": "تم فتح نزاع"
+  }
+}

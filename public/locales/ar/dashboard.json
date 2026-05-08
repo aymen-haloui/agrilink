@@ -1,0 +1,17 @@
+{
+  "title": "لوحة التحكم",
+  "welcome": "مرحبا بعودتك",
+  "stats": {
+    "totalOrders": "إجمالي الطلبات",
+    "totalRevenue": "إجمالي الإيرادات",
+    "successRate": "معدل النجاح",
+    "pendingOrders": "الطلبات المعلقة",
+    "activeProducts": "المنتجات النشطة",
+    "avgOrderValue": "متوسط قيمة الطلب"
+  },
+  "recentOrders": "الطلبات الأخيرة",
+  "topProducts": "أفضل المنتجات",
+  "performanceMetrics": "مؤشرات الأداء",
+  "userManagement": "إدارة المستخدمين",
+  "auditLog": "سجل التدقيق"
+}

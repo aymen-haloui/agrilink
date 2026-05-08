@@ -1,0 +1,24 @@
+{
+  "title": "المنتجات",
+  "addProduct": "إضافة منتج",
+  "editProduct": "تعديل المنتج",
+  "deleteProduct": "حذف المنتج",
+  "name": "اسم المنتج",
+  "description": "الوصف",
+  "category": "الفئة",
+  "price": "السعر",
+  "stock": "المخزون",
+  "minOrder": "الحد الأدنى للطلب",
+  "sku": "رمز المنتج",
+  "status": "الحالة",
+  "actions": "الإجراءات",
+  "viewDetails": "عرض التفاصيل",
+  "noProducts": "لم يتم العثور على منتجات",
+  "categories": {
+    "agriculture": "الزراعة",
+    "textiles": "المنسوجات",
+    "metals": "المعادن",
+    "chemicals": "المواد الكيميائية",
+    "machinery": "الآلات"
+  }
+}

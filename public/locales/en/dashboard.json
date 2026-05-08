@@ -1,0 +1,17 @@
+{
+  "title": "Dashboard",
+  "welcome": "Welcome back",
+  "stats": {
+    "totalOrders": "Total Orders",
+    "totalRevenue": "Total Revenue",
+    "successRate": "Success Rate",
+    "pendingOrders": "Pending Orders",
+    "activeProducts": "Active Products",
+    "avgOrderValue": "Avg Order Value"
+  },
+  "recentOrders": "Recent Orders",
+  "topProducts": "Top Products",
+  "performanceMetrics": "Performance Metrics",
+  "userManagement": "User Management",
+  "auditLog": "Audit Log"
+}
