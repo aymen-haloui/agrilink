@@ -9,8 +9,9 @@ export const metadata = {
 
 export default async function LoginPage() {
   const session = await auth();
+  const hasValidSession = !!session?.user?.id && !!(session.user as any)?.role;
   
-  if (session) {
+  if (hasValidSession) {
     redirect('/dashboard');
   }
 
