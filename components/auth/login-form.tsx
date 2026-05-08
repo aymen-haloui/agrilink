@@ -10,10 +10,10 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Spinner } from '@/components/ui/spinner';
-import { CheckCircle2, AlertCircle } from 'lucide-react';
+import { Checkbox } from '@/components/ui/checkbox';
+import { AlertCircle, CheckCircle2, Eye, EyeOff, LockKeyhole, Mail } from 'lucide-react';
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -27,6 +27,8 @@ export default function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -44,6 +46,7 @@ export default function LoginForm() {
       const result = await signIn('credentials', {
         email: values.email,
         password: values.password,
+        callbackUrl: '/dashboard',
         redirect: false,
       });
 
@@ -65,23 +68,23 @@ export default function LoginForm() {
   };
 
   return (
-    <Card className="border-0 shadow-xl">
-      <CardHeader className="space-y-2">
-        <CardTitle className="text-2xl">Welcome Back</CardTitle>
-        <CardDescription>
-          Sign in to your account to access Agrilink
-        </CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <div className="rounded-[20px] border border-border/80 bg-card p-6 shadow-[0_20px_45px_rgba(1,40,67,0.12)] sm:p-8">
+      <div className="mb-6 space-y-2">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Secure Access</p>
+        <h2 className="text-3xl font-black tracking-tight text-foreground">Welcome back</h2>
+        <p className="text-sm text-muted-foreground">Sign in to access your marketplace workspace.</p>
+      </div>
+
+      <div className="space-y-5">
         {error && (
-          <Alert variant="destructive" className="border-red-200 bg-red-50 text-red-900 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200">
+          <Alert variant="destructive" className="rounded-xl border-red-300 bg-red-50 text-red-900 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200">
             <AlertCircle className="h-4 w-4" />
             <AlertDescription>{error}</AlertDescription>
           </Alert>
         )}
 
         {success && (
-          <Alert className="border-green-200 bg-green-50 text-green-900 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200">
+          <Alert className="rounded-xl border-green-200 bg-green-50 text-green-900 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200">
             <CheckCircle2 className="h-4 w-4" />
             <AlertDescription>Sign in successful! Redirecting...</AlertDescription>
           </Alert>
@@ -94,14 +97,18 @@ export default function LoginForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Email</FormLabel>
                   <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="name@example.com"
-                      {...field}
-                      disabled={isLoading}
-                    />
+                    <div className="relative">
+                      <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        type="email"
+                        placeholder="name@example.com"
+                        className="h-12 rounded-xl pl-11"
+                        {...field}
+                        disabled={isLoading}
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -114,30 +121,50 @@ export default function LoginForm() {
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center justify-between">
-                    <FormLabel>Password</FormLabel>
+                    <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Password</FormLabel>
                     <Link
                       href="/forgot-password"
-                      className="text-sm text-primary hover:underline"
+                      className="text-xs font-semibold text-primary transition hover:opacity-80"
                     >
                       Forgot password?
                     </Link>
                   </div>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="••••••••"
-                      {...field}
-                      disabled={isLoading}
-                    />
+                    <div className="relative">
+                      <LockKeyhole className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Input
+                        type={showPassword ? 'text' : 'password'}
+                        placeholder="••••••••"
+                        className="h-12 rounded-xl pl-11 pr-12"
+                        {...field}
+                        disabled={isLoading}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 text-sm text-muted-foreground">
+                <Checkbox checked={rememberMe} onCheckedChange={(checked) => setRememberMe(Boolean(checked))} />
+                Remember me
+              </label>
+              <span className="text-xs text-muted-foreground">Secure session</span>
+            </div>
+
             <Button
               type="submit"
-              className="w-full"
+              className="h-12 w-full rounded-xl bg-gradient-to-r from-primary to-[#ff5d5d] text-sm font-semibold shadow-[0_14px_24px_rgba(255,49,49,0.34)]"
               disabled={isLoading || success}
             >
               {isLoading ? (
@@ -164,20 +191,20 @@ export default function LoginForm() {
         </div>
 
         <Link href="/register" className="block">
-          <Button type="button" variant="outline" className="w-full">
+          <Button type="button" variant="outline" className="h-11 w-full rounded-xl border-border/80">
             Create an account
           </Button>
         </Link>
 
-        <div className="bg-muted rounded-lg p-4 text-sm text-muted-foreground">
-          <p className="font-semibold mb-2">Demo Credentials:</p>
-          <ul className="space-y-1 text-xs">
-            <li>Supplier: supplier1@agrilink.dz / password123</li>
-            <li>Buyer: buyer1@agrilink.dz / password123</li>
-            <li>Admin: admin@agrilink.dz / password123</li>
+        <div className="rounded-xl border border-border/70 bg-muted/40 p-4 text-sm text-muted-foreground">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em]">Demo credentials</p>
+          <ul className="space-y-1.5 text-xs">
+            <li><span className="font-semibold text-foreground">Supplier:</span> supplier1@agrilink.dz / password123</li>
+            <li><span className="font-semibold text-foreground">Buyer:</span> buyer1@agrilink.dz / password123</li>
+            <li><span className="font-semibold text-foreground">Admin:</span> admin@agrilink.dz / password123</li>
           </ul>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

@@ -120,6 +120,66 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply tracking-tight;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@layer utilities {
+  .surface-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(1, 40, 67, 0.04) 0.8px, transparent 0.8px);
+    background-size: 16px 16px;
+    opacity: 0.18;
+  }
+
+  .card-premium {
+    border: 1px solid var(--color-border);
+    background: color-mix(in oklab, var(--color-card) 90%, white 10%);
+    box-shadow: 0 16px 34px rgba(1, 40, 67, 0.08);
+  }
+
+  .glass-panel {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+    backdrop-filter: blur(8px);
+  }
+
+  .animate-float {
+    animation: float 5.5s ease-in-out infinite;
+  }
+
+  .animate-fade-slide {
+    animation: fade-slide 0.5s ease-out both;
   }
 }

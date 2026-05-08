@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import RegisterForm from '@/components/auth/register-form';
+import AuthShell from '@/components/auth/auth-shell';
 
 export const metadata = {
   title: 'Create Account',
@@ -16,10 +17,12 @@ export default async function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted px-4 py-8">
-      <div className="w-full max-w-md">
-        <RegisterForm />
-      </div>
-    </div>
+    <AuthShell
+      mode="register"
+      title="Launch your supplier or buyer account with enterprise-grade workflows."
+      subtitle="Create your Agrilink account to access verified B2B procurement, inventory visibility, and role-based operations."
+    >
+      <RegisterForm />
+    </AuthShell>
   );
 }

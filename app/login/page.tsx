@@ -1,6 +1,7 @@
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import LoginForm from '@/components/auth/login-form';
+import AuthShell from '@/components/auth/auth-shell';
 
 export const metadata = {
   title: 'Sign In',
@@ -16,10 +17,12 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted px-4">
-      <div className="w-full max-w-md">
-        <LoginForm />
-      </div>
-    </div>
+    <AuthShell
+      mode="login"
+      title="Secure B2B access for procurement and supplier operations."
+      subtitle="Sign in to manage orders, supplier activity, and marketplace performance in one trusted workspace."
+    >
+      <LoginForm />
+    </AuthShell>
   );
 }
