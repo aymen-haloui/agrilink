@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { ArrowLeft, BadgeCheck, Globe2, ShieldCheck, Truck } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 type Lang = 'en' | 'fr' | 'ar';
 
@@ -16,58 +16,20 @@ interface AuthShellProps {
 const t = {
   en: {
     backHome: 'Back to Home',
-    badge: 'Enterprise marketplace',
-    clientNote: 'Client note',
-    clientQuote: '"Agrilink helped us reduce procurement cycle time and improve supplier reliability across regions."',
-    clientRole: 'Regional Operations Lead',
-    procurementPulse: 'Procurement pulse',
-    openRFQs: 'Open RFQs',
-    transitLoads: 'Transit loads',
     createAccount: 'Create account',
     signIn: 'Sign in',
-    metrics: [
-      { label: 'Verified suppliers', value: '2,840+' },
-      { label: 'Live monthly orders', value: '18.7K' },
-      { label: 'Coverage areas', value: '58 wilayas' },
-    ],
   },
   fr: {
     backHome: 'Accueil',
-    badge: 'Place de marché entreprise',
-    clientNote: 'Témoignage',
-    clientQuote: '"Agrilink nous a permis de réduire les délais d\'approvisionnement et d\'améliorer la fiabilité des fournisseurs."',
-    clientRole: 'Responsable des opérations régionales',
-    procurementPulse: 'Tableau de bord',
-    openRFQs: 'Appels d\'offres',
-    transitLoads: 'Chargements en transit',
     createAccount: 'Créer un compte',
     signIn: 'Se connecter',
-    metrics: [
-      { label: 'Fournisseurs vérifiés', value: '2 840+' },
-      { label: 'Commandes mensuelles', value: '18,7K' },
-      { label: 'Zones couvertes', value: '58 wilayas' },
-    ],
   },
   ar: {
     backHome: 'الرئيسية',
-    badge: 'سوق المؤسسات',
-    clientNote: 'تعليق العميل',
-    clientQuote: '"أغريلينك ساعدنا على تقليل دورة التوريد وتحسين موثوقية الموردين عبر المناطق."',
-    clientRole: 'مدير العمليات الإقليمية',
-    procurementPulse: 'لوحة المشتريات',
-    openRFQs: 'طلبات العروض',
-    transitLoads: 'الشحنات',
     createAccount: 'إنشاء حساب',
     signIn: 'تسجيل الدخول',
-    metrics: [
-      { label: 'موردون موثوقون', value: '+2,840' },
-      { label: 'طلبات شهرية', value: '18.7K' },
-      { label: 'مناطق التغطية', value: '58 ولاية' },
-    ],
   },
 };
-
-const metricIcons = [BadgeCheck, Globe2, Truck];
 
 function LangSwitcher({ language, setLanguage }: { language: Lang; setLanguage: (l: Lang) => void }) {
   return (
@@ -129,54 +91,9 @@ export default function AuthShell({ title, subtitle, mode, children }: AuthShell
             </Link>
 
             <div className="mt-12 max-w-xl animate-fade-slide">
-              <p className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.15em] text-white/90">
-                <ShieldCheck className="h-3.5 w-3.5" />
-                {tr.badge}
-              </p>
-              <h1 className="mt-5 text-5xl font-extrabold leading-[1.04] text-white xl:text-6xl">{title}</h1>
+              <h1 className="text-5xl font-extrabold leading-[1.04] text-white xl:text-6xl">{title}</h1>
               <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/78 xl:text-xl">{subtitle}</p>
             </div>
-
-            <div className="mt-12 grid gap-3 sm:grid-cols-3">
-              {tr.metrics.map((item, i) => {
-                const Icon = metricIcons[i];
-                return (
-                  <div
-                    key={item.label}
-                    className="rounded-2xl border border-white/26 bg-white/[0.14] p-4 shadow-[0_18px_35px_rgba(1,40,67,0.36)] backdrop-blur-md transition duration-300 hover:-translate-y-1 hover:bg-white/[0.18]"
-                  >
-                    <div className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#ff3131]/26">
-                      <Icon className="h-4 w-4 text-[#ffd0d0]" />
-                    </div>
-                    <p className="mt-2 text-xl font-extrabold text-white">{item.value}</p>
-                    <p className="mt-1 text-xs text-white/72">{item.label}</p>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="pointer-events-none absolute right-0 top-28 hidden w-[280px] rounded-2xl border border-white/20 bg-white/[0.12] p-4 shadow-[0_18px_40px_rgba(1,40,67,0.35)] backdrop-blur-md xl:block animate-float">
-              <p className="text-xs uppercase tracking-[0.14em] text-white/65">{tr.procurementPulse}</p>
-              <div className="mt-3 grid grid-cols-2 gap-2 text-xs">
-                <div className="rounded-lg bg-white/10 p-2">
-                  <p className="text-white/65">{tr.openRFQs}</p>
-                  <p className="mt-1 text-base font-bold text-white">184</p>
-                </div>
-                <div className="rounded-lg bg-white/10 p-2">
-                  <p className="text-white/65">{tr.transitLoads}</p>
-                  <p className="mt-1 text-base font-bold text-white">62</p>
-                </div>
-              </div>
-              <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/15">
-                <div className="h-full w-[76%] rounded-full bg-gradient-to-r from-[#ff3131] to-[#ff8c8c]" />
-              </div>
-            </div>
-          </div>
-
-          <div className="relative mt-auto rounded-2xl border border-white/24 bg-white/[0.12] p-4 shadow-[0_16px_34px_rgba(1,40,67,0.34)] backdrop-blur-md">
-            <p className="text-xs uppercase tracking-[0.15em] text-white/60">{tr.clientNote}</p>
-            <p className="mt-2 text-sm text-white/80">{tr.clientQuote}</p>
-            <p className="mt-3 text-xs font-semibold text-white/65">{tr.clientRole}</p>
           </div>
         </div>
       </section>

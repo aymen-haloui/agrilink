@@ -181,17 +181,6 @@ export default function LoginForm() {
           </form>
         </Form>
 
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-muted" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="bg-card px-2 text-muted-foreground">
-              New to our platform?
-            </span>
-          </div>
-        </div>
-
         <Link href="/register" className="block">
           <Button type="button" variant="outline" className="h-11 w-full rounded-xl border-border/80">
             Create an account
