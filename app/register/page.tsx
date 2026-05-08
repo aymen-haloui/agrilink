@@ -17,11 +17,7 @@ export default async function RegisterPage() {
   }
 
   return (
-    <AuthShell
-      mode="register"
-      title="Launch your supplier or buyer account with enterprise-grade workflows."
-      subtitle="Create your Agrilink account to access verified B2B procurement, inventory visibility, and role-based operations."
-    >
+    <AuthShell mode="register">
       <RegisterForm />
     </AuthShell>
   );

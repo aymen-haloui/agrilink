@@ -17,11 +17,7 @@ export default async function LoginPage() {
   }
 
   return (
-    <AuthShell
-      mode="login"
-      title="Secure B2B access for procurement and supplier operations."
-      subtitle="Sign in to manage orders, supplier activity, and marketplace performance in one trusted workspace."
-    >
+    <AuthShell mode="login">
       <LoginForm />
     </AuthShell>
   );
