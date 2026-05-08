@@ -68,10 +68,12 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="rounded-[20px] border border-border/80 bg-card p-6 shadow-[0_20px_45px_rgba(1,40,67,0.12)] sm:p-8">
+    <div className="relative overflow-hidden rounded-[22px] border border-[#d1dce7] bg-card/95 p-6 shadow-[0_30px_60px_rgba(1,40,67,0.2)] sm:p-9">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#012843]/6 to-transparent" />
+      <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-[#ff3131]/14 blur-2xl" />
       <div className="mb-6 space-y-2">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Secure Access</p>
-        <h2 className="text-3xl font-black tracking-tight text-foreground">Welcome back</h2>
+        <h2 className="text-3xl font-extrabold tracking-tight text-foreground">Welcome back</h2>
         <p className="text-sm text-muted-foreground">Sign in to access your marketplace workspace.</p>
       </div>
 
@@ -104,7 +106,7 @@ export default function LoginForm() {
                       <Input
                         type="email"
                         placeholder="name@example.com"
-                        className="h-12 rounded-xl pl-11"
+                        className="h-12 rounded-xl border-[#cfdbe6] bg-white/90 pl-11 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition duration-300 focus-visible:border-[#ff3131]/55 focus-visible:ring-[#ff3131]/20"
                         {...field}
                         disabled={isLoading}
                       />
@@ -135,7 +137,7 @@ export default function LoginForm() {
                       <Input
                         type={showPassword ? 'text' : 'password'}
                         placeholder="••••••••"
-                        className="h-12 rounded-xl pl-11 pr-12"
+                        className="h-12 rounded-xl border-[#cfdbe6] bg-white/90 pl-11 pr-12 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)] transition duration-300 focus-visible:border-[#ff3131]/55 focus-visible:ring-[#ff3131]/20"
                         {...field}
                         disabled={isLoading}
                       />
@@ -164,7 +166,7 @@ export default function LoginForm() {
 
             <Button
               type="submit"
-              className="h-12 w-full rounded-xl bg-gradient-to-r from-primary to-[#ff5d5d] text-sm font-semibold shadow-[0_14px_24px_rgba(255,49,49,0.34)]"
+              className="h-12 w-full rounded-xl bg-gradient-to-r from-primary to-[#ff5d5d] text-sm font-semibold shadow-[0_18px_30px_rgba(255,49,49,0.34)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_34px_rgba(255,49,49,0.4)]"
               disabled={isLoading || success}
             >
               {isLoading ? (
