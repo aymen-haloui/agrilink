@@ -94,12 +94,6 @@ export default function AuthShell({ mode, children }: AuthShellProps) {
       >
         <div className="absolute inset-0 backdrop-blur-[1px]" />
         <div className="relative z-10 w-full px-5 pb-7 pt-5 sm:px-8">
-          <div className="mb-4 flex justify-end">
-            <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-semibold text-white/70 transition hover:text-white">
-              {tr.backHome}
-              <ArrowLeft className={`h-3.5 w-3.5 ${isRTL ? '' : 'rotate-180'}`} />
-            </Link>
-          </div>
           <Link href="/" className="block text-xl font-black tracking-[0.18em] text-white">AGRILINK</Link>
           <h1 className="mt-2 text-xl font-extrabold leading-snug text-white sm:text-2xl">{content.title}</h1>
           <p className="mt-1.5 max-w-md text-sm leading-relaxed text-white/72">{content.subtitle}</p>
@@ -121,14 +115,10 @@ export default function AuthShell({ mode, children }: AuthShellProps) {
           <div className="absolute -top-12 right-16 h-40 w-40 rounded-full bg-[#ff3131]/20 blur-3xl" />
           <div className="absolute bottom-20 left-8 h-36 w-36 rounded-full bg-white/8 blur-3xl" />
 
-          {/* Top row: brand left, back-to-home right */}
-          <div className="relative z-10 flex items-center justify-between">
+          {/* Top row: brand only */}
+          <div className="relative z-10">
             <Link href="/" className="text-2xl font-black tracking-[0.18em] text-white transition-opacity hover:opacity-80">
               AGRILINK
-            </Link>
-            <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-white/65 transition-colors duration-200 hover:text-white">
-              {tr.backHome}
-              <ArrowLeft className={`h-4 w-4 ${isRTL ? '' : 'rotate-180'}`} />
             </Link>
           </div>
 
@@ -151,7 +141,11 @@ export default function AuthShell({ mode, children }: AuthShellProps) {
           <div className="separator-glow" />
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_0%,rgba(255,49,49,0.06),transparent_40%),radial-gradient(ellipse_at_80%_100%,rgba(1,40,67,0.07),transparent_40%)]" />
           <div className="w-full max-w-[500px]">
-            <div className="mb-8 flex justify-end">
+            <div className="mb-8 flex items-center justify-between">
+              <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-[#647d94] transition-colors duration-200 hover:text-[#012843]">
+                <ArrowLeft className={`h-4 w-4 ${isRTL ? 'rotate-180' : ''}`} />
+                {tr.backHome}
+              </Link>
               <LangSwitcher language={language} setLanguage={setLanguage} />
             </div>
             {children}
@@ -163,7 +157,11 @@ export default function AuthShell({ mode, children }: AuthShellProps) {
       <div className="relative bg-[#f1f4f8] px-4 py-8 sm:px-8 sm:py-10 lg:hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,49,49,0.05),transparent_40%)]" />
         <div className="relative mx-auto w-full max-w-[520px]">
-          <div className="mb-6 flex justify-end">
+          <div className="mb-6 flex items-center justify-between">
+            <Link href="/" className="inline-flex items-center gap-1.5 text-sm font-medium text-[#647d94] transition-colors duration-200 hover:text-[#012843]">
+              <ArrowLeft className={`h-4 w-4 ${isRTL ? 'rotate-180' : ''}`} />
+              {tr.backHome}
+            </Link>
             <LangSwitcher language={language} setLanguage={setLanguage} />
           </div>
           {children}

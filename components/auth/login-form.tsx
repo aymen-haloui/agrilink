@@ -72,10 +72,10 @@ export default function LoginForm() {
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ff3131]/30 to-transparent" />
       <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#ff3131]/10 blur-2xl" />
 
-      <div className="mb-8 space-y-1.5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#ff3131]">Secure Access</p>
-        <h2 className="text-2xl font-extrabold tracking-tight text-[#012843]">Welcome back</h2>
-        <p className="text-sm leading-relaxed text-[#647d94]">Sign in to access your marketplace workspace.</p>
+      <div className="mb-8 space-y-2">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ff3131]">Secure Access</p>
+        <h2 className="text-3xl font-extrabold tracking-tight text-[#012843]">Welcome back</h2>
+        <p className="text-base leading-relaxed text-[#647d94]">Sign in to access your marketplace workspace.</p>
       </div>
 
       <div className="space-y-5">
@@ -100,14 +100,14 @@ export default function LoginForm() {
               name="email"
               render={({ field }) => (
                 <FormItem className="space-y-1.5">
-                  <FormLabel className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">Email</FormLabel>
+                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">Email</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-[15px] w-[15px] -translate-y-1/2 text-[#9db0c3]" />
                       <Input
                         type="email"
                         placeholder="name@example.com"
-                        className="h-11 rounded-xl border-[#dce5ef] bg-[#f8fafc] pl-10 text-sm text-[#012843] placeholder:text-[#b0c4d4] transition-all duration-200 hover:border-[#c5d5e4] focus-visible:border-[#ff3131]/50 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#ff3131]/15 focus-visible:ring-offset-0"
+                        className="h-12 rounded-xl border-[#dce5ef] bg-[#f8fafc] pl-10 text-base text-[#012843] placeholder:text-[#b0c4d4] transition-all duration-200 hover:border-[#c5d5e4] focus-visible:border-[#ff3131]/50 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#ff3131]/15 focus-visible:ring-offset-0"
                         {...field}
                         disabled={isLoading}
                       />
@@ -124,10 +124,10 @@ export default function LoginForm() {
               render={({ field }) => (
                 <FormItem className="space-y-1.5">
                   <div className="flex items-center justify-between">
-                    <FormLabel className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">Password</FormLabel>
+                    <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">Password</FormLabel>
                     <Link
                       href="/forgot-password"
-                      className="text-[11px] font-semibold text-[#ff3131] transition-opacity hover:opacity-75"
+                      className="text-xs font-semibold text-[#ff3131] transition-opacity hover:opacity-75"
                     >
                       Forgot password?
                     </Link>
@@ -138,7 +138,7 @@ export default function LoginForm() {
                       <Input
                         type={showPassword ? 'text' : 'password'}
                         placeholder="••••••••"
-                        className="h-11 rounded-xl border-[#dce5ef] bg-[#f8fafc] pl-10 pr-11 text-sm text-[#012843] placeholder:text-[#b0c4d4] transition-all duration-200 hover:border-[#c5d5e4] focus-visible:border-[#ff3131]/50 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#ff3131]/15 focus-visible:ring-offset-0"
+                        className="h-12 rounded-xl border-[#dce5ef] bg-[#f8fafc] pl-10 pr-11 text-base text-[#012843] placeholder:text-[#b0c4d4] transition-all duration-200 hover:border-[#c5d5e4] focus-visible:border-[#ff3131]/50 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#ff3131]/15 focus-visible:ring-offset-0"
                         {...field}
                         disabled={isLoading}
                       />
@@ -158,7 +158,7 @@ export default function LoginForm() {
             />
 
             <div className="flex items-center justify-between pt-1">
-              <label className="flex cursor-pointer items-center gap-2 text-sm text-[#647d94]">
+              <label className="flex cursor-pointer items-center gap-2 text-base text-[#647d94]">
                 <Checkbox
                   checked={rememberMe}
                   onCheckedChange={(checked) => setRememberMe(Boolean(checked))}
@@ -166,7 +166,7 @@ export default function LoginForm() {
                 />
                 Remember me
               </label>
-              <span className="flex items-center gap-1 text-[11px] text-[#9db0c3]">
+              <span className="flex items-center gap-1 text-xs text-[#9db0c3]">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-green-400" />
                 Secure session
               </span>
@@ -174,7 +174,7 @@ export default function LoginForm() {
 
             <Button
               type="submit"
-              className="h-11 w-full rounded-xl bg-gradient-to-r from-[#ff3131] to-[#ff5a5a] text-sm font-semibold tracking-[0.01em] text-white shadow-[0_4px_14px_rgba(255,49,49,0.30)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_22px_rgba(255,49,49,0.40)] active:translate-y-0"
+              className="h-12 w-full rounded-xl bg-gradient-to-r from-[#ff3131] to-[#ff5a5a] text-base font-semibold tracking-[0.01em] text-white shadow-[0_4px_14px_rgba(255,49,49,0.30)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_22px_rgba(255,49,49,0.40)] active:translate-y-0"
               disabled={isLoading || success}
             >
               {isLoading ? (
@@ -193,7 +193,7 @@ export default function LoginForm() {
           <Button
             type="button"
             variant="outline"
-            className="h-11 w-full rounded-xl border-[#dce5ef] bg-white text-sm font-medium text-[#4a6278] transition-all duration-200 hover:border-[#c5d5e4] hover:bg-[#f5f8fb] hover:text-[#012843]"
+            className="h-12 w-full rounded-xl border-[#dce5ef] bg-white text-base font-medium text-[#4a6278] transition-all duration-200 hover:border-[#c5d5e4] hover:bg-[#f5f8fb] hover:text-[#012843]"
           >
             Create an account
           </Button>

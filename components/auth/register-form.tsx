@@ -91,10 +91,10 @@ export default function RegisterForm() {
     <div className="animate-in fade-in slide-in-from-bottom-3 relative overflow-hidden rounded-2xl border border-[#dce5ef] bg-white p-7 shadow-[0_2px_8px_rgba(1,40,67,0.06),0_24px_56px_rgba(1,40,67,0.14)] duration-500 sm:p-9">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ff3131]/30 to-transparent" />
       <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#ff3131]/10 blur-2xl" />
-      <div className="mb-8 space-y-1.5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#ff3131]">Enterprise Onboarding</p>
-        <h2 className="text-2xl font-extrabold tracking-tight text-[#012843]">Create your account</h2>
-        <p className="text-sm leading-relaxed text-[#647d94]">Join Agrilink as a supplier or buyer and start trading with verified partners.</p>
+      <div className="mb-8 space-y-2">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#ff3131]">Enterprise Onboarding</p>
+        <h2 className="text-3xl font-extrabold tracking-tight text-[#012843]">Create your account</h2>
+        <p className="text-base leading-relaxed text-[#647d94]">Join Agrilink as a supplier or buyer and start trading with verified partners.</p>
       </div>
 
       <div className="space-y-4">
