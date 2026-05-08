@@ -24,7 +24,7 @@ export async function getServerSession() {
  */
 export async function requireAuth() {
   const session = await getServerSession();
-  if (!session) {
+  if (!session || !session.user || !session.user.id || !session.user.role) {
     redirect('/login');
   }
   return session;

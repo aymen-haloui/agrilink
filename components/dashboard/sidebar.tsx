@@ -76,7 +76,8 @@ const menuItems = [
 export default function DashboardSidebar({ session }: DashboardSidebarProps) {
   const pathname = usePathname();
 
-  const userRole = (session.user as any).role as string;
+  const userRole = ((session.user as any)?.role as string) || 'BUYER';
+  const userEmail = session.user?.email || 'unknown@agrilink';
   const visibleItems = menuItems.filter((item) =>
     item.roles.includes(userRole)
   );
@@ -121,7 +122,7 @@ export default function DashboardSidebar({ session }: DashboardSidebarProps) {
       <div className="border-t border-border p-4 space-y-3">
         <div className="px-4 py-3 rounded-lg bg-muted">
           <p className="text-xs text-muted-foreground">Signed in as</p>
-          <p className="text-sm font-semibold truncate">{session.user.email}</p>
+          <p className="text-sm font-semibold truncate">{userEmail}</p>
           <p className="text-xs text-muted-foreground capitalize">
             {userRole.toLowerCase()}
           </p>
