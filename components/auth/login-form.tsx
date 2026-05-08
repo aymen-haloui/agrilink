@@ -198,14 +198,6 @@ export default function LoginForm() {
           </Button>
         </Link>
 
-        <div className="rounded-xl border border-border/70 bg-muted/40 p-4 text-sm text-muted-foreground">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.12em]">Demo credentials</p>
-          <ul className="space-y-1.5 text-xs">
-            <li><span className="font-semibold text-foreground">Supplier:</span> supplier1@agrilink.dz / password123</li>
-            <li><span className="font-semibold text-foreground">Buyer:</span> buyer1@agrilink.dz / password123</li>
-            <li><span className="font-semibold text-foreground">Admin:</span> admin@agrilink.dz / password123</li>
-          </ul>
-        </div>
       </div>
     </div>
   );
