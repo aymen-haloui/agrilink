@@ -191,6 +191,7 @@ const copy: Record<
 export default function HomePage() {
   const [language, setLanguage] = useState<Lang>('en');
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
 
   useEffect(() => {
     const saved = localStorage.getItem('agrilink-lang') as Lang | null;
@@ -210,6 +211,21 @@ export default function HomePage() {
     onScroll();
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = ['value', 'how', 'preview'];
+    const observers = sections.map((id) => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      const obs = new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id); },
+        { rootMargin: '-30% 0px -60% 0px' }
+      );
+      obs.observe(el);
+      return obs;
+    });
+    return () => observers.forEach((o) => o?.disconnect());
   }, []);
 
   const t = useMemo(() => copy[language], [language]);
@@ -235,34 +251,57 @@ export default function HomePage() {
         <div className="pointer-events-none absolute inset-0 backdrop-blur-[1.6px]" />
 
         <header
-          className={`sticky top-0 z-20 border-b px-4 py-3 backdrop-blur-xl transition-all duration-300 sm:px-8 lg:px-14 ${
+          className={`sticky top-0 z-20 px-4 transition-all duration-300 sm:px-8 lg:px-14 ${
             scrolled
-              ? 'border-[#cfd9e3] bg-[#fcfdff]/84 shadow-[0_8px_24px_rgba(1,40,67,0.14)]'
-              : 'border-[#d8e1ea]/70 bg-[#fcfdff]/76'
+              ? 'border-b border-[#ccd6e0] bg-[#fcfdff]/92 shadow-[0_6px_28px_rgba(1,40,67,0.12)] backdrop-blur-2xl'
+              : 'border-b border-white/30 bg-[#fcfdff]/60 backdrop-blur-xl'
           }`}
         >
-          <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <Link href="/" className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#012843] text-sm font-black text-white">
-                AG
-              </div>
-              <div>
-                <p className="text-sm font-black tracking-[0.22em] text-[#012843]">AGRILINK</p>
-              </div>
+          <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-6">
+            {/* Logo */}
+            <Link href="/" className="flex shrink-0 items-center gap-2.5 group">
+              <p className={`text-sm font-black tracking-[0.22em] transition-colors duration-200 ${
+                scrolled ? 'text-[#012843]' : 'text-white'
+              } group-hover:text-[#ff3131]`}>AGRILINK</p>
             </Link>
 
-            <nav className="hidden items-center gap-7 text-sm font-medium text-[#567087] lg:flex">
-              <a href="#value" className="relative transition-colors hover:text-[#012843] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#ff3131] after:transition-all hover:after:w-full">{t.nav.value}</a>
-              <a href="#how" className="relative transition-colors hover:text-[#012843] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#ff3131] after:transition-all hover:after:w-full">{t.nav.howItWorks}</a>
-              <a href="#preview" className="relative transition-colors hover:text-[#012843] after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#ff3131] after:transition-all hover:after:w-full">{t.nav.product}</a>
+            {/* Nav links — desktop */}
+            <nav className="hidden items-center gap-1 lg:flex">
+              {([
+                { href: '#value', label: t.nav.value, id: 'value' },
+                { href: '#how', label: t.nav.howItWorks, id: 'how' },
+                { href: '#preview', label: t.nav.product, id: 'preview' },
+              ] as { href: string; label: string; id: string }[]).map(({ href, label, id }) => {
+                const isActive = activeSection === id;
+                return (
+                  <a
+                    key={id}
+                    href={href}
+                    className={`relative px-3 py-2 text-sm font-semibold tracking-[0.01em] transition-colors duration-200
+                      after:absolute after:inset-x-3 after:-bottom-px after:h-[2px] after:rounded-full after:bg-[#ff3131] after:transition-all after:duration-200
+                      ${
+                        isActive
+                          ? `${scrolled ? 'text-[#ff3131]' : 'text-white'} after:opacity-100 after:scale-x-100`
+                          : `${scrolled ? 'text-[#4a6278] hover:text-[#012843]' : 'text-white/75 hover:text-white'} after:opacity-0 after:scale-x-0 hover:after:opacity-100 hover:after:scale-x-100`
+                      }`}
+                  >
+                    {label}
+                  </a>
+                );
+              })}
             </nav>
 
+            {/* Right controls */}
             <div className="flex items-center gap-2 sm:gap-3">
+              {/* Language switcher */}
               <div
                 role="tablist"
                 aria-label={t.nav.language}
-                className="inline-flex rounded-xl border border-[#d0dbe6] bg-white/88 p-1 shadow-[0_6px_16px_rgba(1,40,67,0.08)]"
+                className={`hidden items-center rounded-xl border p-1 transition-colors duration-300 sm:inline-flex ${
+                  scrolled
+                    ? 'border-[#d0dbe6] bg-white/90 shadow-sm'
+                    : 'border-white/25 bg-white/10'
+                }`}
               >
                 {(['en', 'fr', 'ar'] as Lang[]).map((lang) => (
                   <button
@@ -271,22 +310,41 @@ export default function HomePage() {
                     onClick={() => setLanguage(lang)}
                     className={`rounded-lg px-2.5 py-1.5 text-xs font-semibold uppercase tracking-wide transition-all duration-200 ${
                       language === lang
-                        ? 'bg-[#012843] text-white shadow-[0_6px_12px_rgba(1,40,67,0.24)]'
-                        : 'text-[#4f697f] hover:bg-[#eef3f8] hover:text-[#012843]'
+                        ? scrolled
+                          ? 'bg-[#012843] text-white shadow-sm'
+                          : 'bg-white/25 text-white shadow-sm'
+                        : scrolled
+                        ? 'text-[#4f697f] hover:bg-[#eef3f8] hover:text-[#012843]'
+                        : 'text-white/70 hover:bg-white/15 hover:text-white'
                     }`}
                   >
                     {lang}
                   </button>
                 ))}
               </div>
+
+              {/* Sign In */}
+              <Link
+                href="/login"
+                className={`hidden text-sm font-semibold transition-colors duration-200 lg:block ${
+                  scrolled ? 'text-[#4a6278] hover:text-[#012843]' : 'text-white/80 hover:text-white'
+                }`}
+              >
+                {t.nav.signIn}
+              </Link>
+
+              {/* CTA */}
               <Link
                 href="/register"
-                className="inline-flex items-center rounded-xl bg-[#ff3131] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(255,49,49,0.34)] transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95"
+                className={`inline-flex items-center rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 ${
+                  scrolled
+                    ? 'bg-[#ff3131] shadow-[0_8px_20px_rgba(255,49,49,0.30)] hover:shadow-[0_14px_28px_rgba(255,49,49,0.42)]'
+                    : 'bg-[#ff3131]/90 shadow-[0_8px_20px_rgba(255,49,49,0.38)] hover:bg-[#ff3131] hover:shadow-[0_14px_28px_rgba(255,49,49,0.50)]'
+                }`}
               >
                 {t.nav.register}
               </Link>
             </div>
-          </div>
           </div>
         </header>
 
