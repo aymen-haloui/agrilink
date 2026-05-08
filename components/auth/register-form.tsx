@@ -88,11 +88,13 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="rounded-[20px] border border-border/80 bg-card p-6 shadow-[0_20px_45px_rgba(1,40,67,0.12)] sm:p-8">
-      <div className="mb-6 space-y-2">
-        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">Enterprise Onboarding</p>
-        <h2 className="text-3xl font-black tracking-tight text-foreground">Create your account</h2>
-        <p className="text-sm text-muted-foreground">Join Agrilink as a supplier or buyer and start trading with verified partners.</p>
+    <div className="animate-in fade-in slide-in-from-bottom-3 relative overflow-hidden rounded-2xl border border-[#dce5ef] bg-white p-7 shadow-[0_2px_8px_rgba(1,40,67,0.06),0_24px_56px_rgba(1,40,67,0.14)] duration-500 sm:p-9">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#ff3131]/30 to-transparent" />
+      <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-[#ff3131]/10 blur-2xl" />
+      <div className="mb-8 space-y-1.5">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#ff3131]">Enterprise Onboarding</p>
+        <h2 className="text-2xl font-extrabold tracking-tight text-[#012843]">Create your account</h2>
+        <p className="text-sm leading-relaxed text-[#647d94]">Join Agrilink as a supplier or buyer and start trading with verified partners.</p>
       </div>
 
       <div className="space-y-4">
@@ -111,20 +113,20 @@ export default function RegisterForm() {
         )}
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Full Name</FormLabel>
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">Full Name</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <UserCircle2 className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                      <Input placeholder="John Doe" className="h-12 rounded-xl pl-11" {...field} disabled={isLoading} />
+                      <UserCircle2 className="pointer-events-none absolute left-3.5 top-1/2 h-[15px] w-[15px] -translate-y-1/2 text-[#9db0c3]" />
+                      <Input placeholder="John Doe" className="h-11 rounded-xl border-[#dce5ef] bg-[#f8fafc] pl-10 text-sm text-[#012843] placeholder:text-[#b0c4d4] transition-all duration-200 hover:border-[#c5d5e4] focus-visible:border-[#ff3131]/50 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#ff3131]/15 focus-visible:ring-offset-0" {...field} disabled={isLoading} />
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -133,21 +135,21 @@ export default function RegisterForm() {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Email</FormLabel>
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">Email</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-[15px] w-[15px] -translate-y-1/2 text-[#9db0c3]" />
                       <Input
                         type="email"
                         placeholder="name@example.com"
-                        className="h-12 rounded-xl pl-11"
+                        className="h-11 rounded-xl border-[#dce5ef] bg-[#f8fafc] pl-10 text-sm text-[#012843] placeholder:text-[#b0c4d4] transition-all duration-200 hover:border-[#c5d5e4] focus-visible:border-[#ff3131]/50 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#ff3131]/15 focus-visible:ring-offset-0"
                         {...field}
                         disabled={isLoading}
                       />
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -156,11 +158,11 @@ export default function RegisterForm() {
               control={form.control}
               name="role"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">I am a</FormLabel>
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">I am a</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger disabled={isLoading} className="h-12 rounded-xl">
+                      <SelectTrigger disabled={isLoading} className="h-11 rounded-xl border-[#dce5ef] bg-[#f8fafc] text-sm text-[#012843] focus:border-[#ff3131]/50 focus:ring-2 focus:ring-[#ff3131]/15">
                         <SelectValue placeholder="Select your role" />
                       </SelectTrigger>
                     </FormControl>
@@ -169,7 +171,7 @@ export default function RegisterForm() {
                       <SelectItem value="BUYER">Buyer</SelectItem>
                     </SelectContent>
                   </Select>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -178,20 +180,20 @@ export default function RegisterForm() {
               control={form.control}
               name="businessName"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Business Name</FormLabel>
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">Business Name</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <Building2 className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <Building2 className="pointer-events-none absolute left-3.5 top-1/2 h-[15px] w-[15px] -translate-y-1/2 text-[#9db0c3]" />
                       <Input
                         placeholder="Your Company Ltd"
-                        className="h-12 rounded-xl pl-11"
+                        className="h-11 rounded-xl border-[#dce5ef] bg-[#f8fafc] pl-10 text-sm text-[#012843] placeholder:text-[#b0c4d4] transition-all duration-200 hover:border-[#c5d5e4] focus-visible:border-[#ff3131]/50 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#ff3131]/15 focus-visible:ring-offset-0"
                         {...field}
                         disabled={isLoading}
                       />
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -200,29 +202,29 @@ export default function RegisterForm() {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Password</FormLabel>
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">Password</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <LockKeyhole className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <LockKeyhole className="pointer-events-none absolute left-3.5 top-1/2 h-[15px] w-[15px] -translate-y-1/2 text-[#9db0c3]" />
                       <Input
                         type={showPassword ? 'text' : 'password'}
                         placeholder="••••••••"
-                        className="h-12 rounded-xl pl-11 pr-12"
+                        className="h-11 rounded-xl border-[#dce5ef] bg-[#f8fafc] pl-10 pr-11 text-sm text-[#012843] placeholder:text-[#b0c4d4] transition-all duration-200 hover:border-[#c5d5e4] focus-visible:border-[#ff3131]/50 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#ff3131]/15 focus-visible:ring-offset-0"
                         {...field}
                         disabled={isLoading}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-1 text-[#9db0c3] transition-colors hover:bg-[#f0f4f8] hover:text-[#012843]"
                         aria-label={showPassword ? 'Hide password' : 'Show password'}
                       >
                         {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </button>
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -231,29 +233,29 @@ export default function RegisterForm() {
               control={form.control}
               name="confirmPassword"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">Confirm Password</FormLabel>
+                <FormItem className="space-y-1.5">
+                  <FormLabel className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#7a90a4]">Confirm Password</FormLabel>
                   <FormControl>
                     <div className="relative">
-                      <LockKeyhole className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                      <LockKeyhole className="pointer-events-none absolute left-3.5 top-1/2 h-[15px] w-[15px] -translate-y-1/2 text-[#9db0c3]" />
                       <Input
                         type={showConfirmPassword ? 'text' : 'password'}
                         placeholder="••••••••"
-                        className="h-12 rounded-xl pl-11 pr-12"
+                        className="h-11 rounded-xl border-[#dce5ef] bg-[#f8fafc] pl-10 pr-11 text-sm text-[#012843] placeholder:text-[#b0c4d4] transition-all duration-200 hover:border-[#c5d5e4] focus-visible:border-[#ff3131]/50 focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[#ff3131]/15 focus-visible:ring-offset-0"
                         {...field}
                         disabled={isLoading}
                       />
                       <button
                         type="button"
                         onClick={() => setShowConfirmPassword((prev) => !prev)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                        className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg p-1 text-[#9db0c3] transition-colors hover:bg-[#f0f4f8] hover:text-[#012843]"
                         aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
                       >
                         {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                       </button>
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
@@ -262,22 +264,23 @@ export default function RegisterForm() {
               control={form.control}
               name="terms"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-xl border border-border/70 bg-muted/40 p-3">
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-xl border border-[#dce5ef] bg-[#f8fafc] p-4">
                   <FormControl>
                     <Checkbox
                       checked={field.value}
                       onCheckedChange={field.onChange}
                       disabled={isLoading}
+                      className="border-[#c5d5e4]"
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel className="font-normal text-sm text-muted-foreground">
+                    <FormLabel className="text-sm font-normal text-[#647d94]">
                       I agree to the{' '}
-                      <Link href="/terms" className="text-primary hover:underline">
+                      <Link href="/terms" className="font-semibold text-[#ff3131] hover:opacity-80">
                         Terms of Service
                       </Link>
                     </FormLabel>
-                    <FormMessage />
+                    <FormMessage className="text-xs" />
                   </div>
                 </FormItem>
               )}
@@ -285,7 +288,7 @@ export default function RegisterForm() {
 
             <Button
               type="submit"
-              className="h-12 w-full rounded-xl bg-gradient-to-r from-primary to-[#ff5d5d] text-sm font-semibold shadow-[0_14px_24px_rgba(255,49,49,0.34)]"
+              className="h-11 w-full rounded-xl bg-gradient-to-r from-[#ff3131] to-[#ff5a5a] text-sm font-semibold tracking-[0.01em] text-white shadow-[0_4px_14px_rgba(255,49,49,0.30)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_22px_rgba(255,49,49,0.40)] active:translate-y-0"
               disabled={isLoading || success}
             >
               {isLoading ? (
@@ -300,9 +303,9 @@ export default function RegisterForm() {
           </form>
         </Form>
 
-        <div className="text-center text-sm text-muted-foreground">
+        <div className="text-center text-sm text-[#647d94]">
           Already have an account?{' '}
-          <Link href="/login" className="font-semibold text-primary hover:underline">
+          <Link href="/login" className="font-semibold text-[#ff3131] hover:opacity-80">
             Sign in
           </Link>
         </div>
