@@ -4,13 +4,9 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import {
   BadgeCheck,
-  Boxes,
-  ChartColumnBig,
   Globe,
   Handshake,
-  ShieldCheck,
   Truck,
-  Users,
 } from 'lucide-react';
 
 type Lang = 'en' | 'fr' | 'ar';
@@ -19,9 +15,9 @@ const copy: Record<
   Lang,
   {
     nav: {
-      marketplace: string;
-      features: string;
-      resources: string;
+      value: string;
+      howItWorks: string;
+      product: string;
       signIn: string;
       register: string;
       language: string;
@@ -37,6 +33,7 @@ const copy: Record<
     featuresTitle: string;
     featuresSubtitle: string;
     features: Array<{ title: string; description: string }>;
+    demo: string;
     footerTitle: string;
     footerColumns: Array<{ heading: string; links: string[] }>;
     footer: string;
@@ -44,26 +41,25 @@ const copy: Record<
 > = {
   en: {
     nav: {
-      marketplace: 'Marketplace',
-      features: 'Features',
-      resources: 'Resources',
+      value: 'Marketplace Value',
+      howItWorks: 'How It Works',
+      product: 'Product Preview',
       signIn: 'Sign In',
-      register: 'Register',
+      register: 'Access Platform',
       language: 'Language',
     },
     hero: {
       badge: 'Built for Algerian Agri Trade',
-      title: 'Connect farms, suppliers, and buyers in one B2B flow.',
+      title: 'Anticipate supply risk and secure every procurement decision.',
       subtitle:
-        'Agrilink helps wholesalers source faster, track inventory in real time, and close deals with verified partners.',
-      ctaPrimary: 'Enter Dashboard',
-      ctaSecondary: 'Create an Account',
+        'Agrilink combines verified supplier intelligence, operational visibility, and B2B workflows to speed sourcing and protect margins.',
+      ctaPrimary: 'Access platform',
+      ctaSecondary: 'View product walkthrough',
     },
     trust: [
-      { label: 'Active Suppliers', value: '280+' },
-      { label: 'Monthly Orders', value: '12K' },
-      { label: 'On-time Fulfillment', value: '97%' },
-      { label: 'Coverage Wilayas', value: '42' },
+      { label: 'to prioritize a critical risk', value: '< 20 s' },
+      { label: 'interaction and partner context', value: '360 deg' },
+      { label: 'decision support available', value: '24/7' },
     ],
     featuresTitle: 'Why teams choose Agrilink',
     featuresSubtitle:
@@ -82,6 +78,7 @@ const copy: Record<
         description: 'Track order status, payments, and notifications from a single dashboard.',
       },
     ],
+    demo: 'Book a platform demo',
     footerTitle: 'Enterprise-grade marketplace operations, made simple.',
     footerColumns: [
       { heading: 'Marketplace', links: ['Products', 'Orders', 'Payments', 'Notifications'] },
@@ -93,26 +90,25 @@ const copy: Record<
   },
   fr: {
     nav: {
-      marketplace: 'Marketplace',
-      features: 'Fonctionnalites',
-      resources: 'Ressources',
+      value: 'Valeur platforme',
+      howItWorks: 'Fonctionnement',
+      product: 'Apercu produit',
       signIn: 'Se connecter',
-      register: 'Inscription',
+      register: 'Acceder a la plateforme',
       language: 'Langue',
     },
     hero: {
       badge: 'Concu pour le commerce agricole algerien',
-      title: 'Reliez fermes, fournisseurs et acheteurs dans un seul flux B2B.',
+      title: 'Anticipez le risque operationnel et securisez chaque decision d achat.',
       subtitle:
-        'Agrilink aide les grossistes a s approvisionner plus vite, suivre le stock en temps reel et conclure avec des partenaires verifies.',
-      ctaPrimary: 'Ouvrir le Dashboard',
-      ctaSecondary: 'Creer un compte',
+        'Agrilink combine donnees fournisseurs verifiees, visibilite operationnelle et flux B2B pour accelerer l approvisionnement.',
+      ctaPrimary: 'Acceder a la plateforme',
+      ctaSecondary: 'Voir une demonstration',
     },
     trust: [
-      { label: 'Fournisseurs actifs', value: '280+' },
-      { label: 'Commandes mensuelles', value: '12K' },
-      { label: 'Livraisons a temps', value: '97%' },
-      { label: 'Wilayas couvertes', value: '42' },
+      { label: 'pour prioriser un risque critique', value: '< 20 s' },
+      { label: 'vision interactions et contexte', value: '360 deg' },
+      { label: 'support decisionnel disponible', value: '24/7' },
     ],
     featuresTitle: 'Pourquoi les equipes choisissent Agrilink',
     featuresSubtitle:
@@ -131,6 +127,7 @@ const copy: Record<
         description: 'Suivez commandes, paiements et notifications depuis un tableau unique.',
       },
     ],
+    demo: 'Demander une demonstration',
     footerTitle: 'Operations marketplace de niveau entreprise, simplifiees.',
     footerColumns: [
       { heading: 'Marketplace', links: ['Produits', 'Commandes', 'Paiements', 'Notifications'] },
@@ -142,26 +139,25 @@ const copy: Record<
   },
   ar: {
     nav: {
-      marketplace: 'السوق',
-      features: 'المزايا',
-      resources: 'الموارد',
+      value: 'قيمة المنصة',
+      howItWorks: 'طريقة العمل',
+      product: 'معاينة المنتج',
       signIn: 'تسجيل الدخول',
-      register: 'إنشاء حساب',
+      register: 'الدخول الى المنصة',
       language: 'اللغة',
     },
     hero: {
       badge: 'مبني للتجارة الزراعية في الجزائر',
-      title: 'اربط المزارع والموردين والمشترين في مسار B2B واحد.',
+      title: 'توقع مخاطر التوريد وامن كل قرار شراء.',
       subtitle:
-        'Agrilink يساعد تجار الجملة على التوريد بسرعة، متابعة المخزون لحظيا، واغلاق الصفقات مع شركاء موثقين.',
-      ctaPrimary: 'الدخول الى لوحة التحكم',
-      ctaSecondary: 'إنشاء حساب جديد',
+        'Agrilink يجمع بيانات الموردين الموثوقين مع رؤية تشغيلية واضحة ومسارات B2B لتسريع قرارات الشراء.',
+      ctaPrimary: 'الدخول الى المنصة',
+      ctaSecondary: 'عرض توضيحي',
     },
     trust: [
-      { label: 'موردون نشطون', value: '+280' },
-      { label: 'طلبات شهرية', value: '12K' },
-      { label: 'تسليم في الموعد', value: '%97' },
-      { label: 'ولايات مغطاة', value: '42' },
+      { label: 'لتحديد الخطر الحرج', value: '< 20 ث' },
+      { label: 'رؤية التفاعلات والسياق', value: '360 درجة' },
+      { label: 'دعم القرار متاح', value: '24/7' },
     ],
     featuresTitle: 'لماذا تختار الفرق Agrilink',
     featuresSubtitle:
@@ -180,6 +176,7 @@ const copy: Record<
         description: 'تتبع الطلبات والمدفوعات والتنبيهات من لوحة تحكم واحدة.',
       },
     ],
+    demo: 'احجز عرضا توضيحيا',
     footerTitle: 'تشغيل سوق احترافي بمستوى مؤسسي وببساطة.',
     footerColumns: [
       { heading: 'السوق', links: ['المنتجات', 'الطلبات', 'المدفوعات', 'الإشعارات'] },
@@ -210,197 +207,166 @@ export default function HomePage() {
   const t = useMemo(() => copy[language], [language]);
   const rtl = language === 'ar';
   const metricIcons = [BadgeCheck, Handshake, Truck, Globe];
-  const featureIcons = [Boxes, Users, ChartColumnBig];
+  const heroImage =
+    'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=2000&q=80';
 
   return (
-    <main className="surface-noise relative min-h-screen overflow-x-clip bg-background text-foreground">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(255,49,49,0.09),transparent_24%),radial-gradient(circle_at_90%_4%,rgba(1,40,67,0.09),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(1,40,67,0.08),transparent_32%)]" />
+    <main className="relative min-h-screen overflow-x-clip bg-[#f5f7fa] text-foreground">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_10%_10%,rgba(255,49,49,0.08),transparent_28%),radial-gradient(circle_at_90%_10%,rgba(1,40,67,0.1),transparent_30%)]" />
 
-      <section className="relative mx-auto flex w-full max-w-7xl flex-col px-6 pb-20 pt-6 sm:px-10 lg:px-14">
-        <header className="sticky top-4 z-20 rounded-2xl border border-border/70 bg-card/70 px-4 py-3 shadow-[0_8px_25px_rgba(1,40,67,0.1)] backdrop-blur-xl sm:px-6">
+      <section
+        className="relative min-h-[92vh] border-b border-[#d9e3ec]"
+        style={{
+          backgroundImage: `linear-gradient(90deg, rgba(1,40,67,0.84) 0%, rgba(1,40,67,0.72) 40%, rgba(1,40,67,0.45) 66%, rgba(1,40,67,0.24) 100%), url(${heroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <header className="sticky top-0 z-20 border-b border-[#d8e1ea] bg-[#fcfdff]/90 px-4 py-3 backdrop-blur-xl sm:px-8 lg:px-14">
+          <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-sm font-black text-primary-foreground shadow-[0_10px_20px_rgba(255,49,49,0.28)]">
-              AG
-            </div>
-            <div>
-              <p className="text-base font-black tracking-wide">Agrilink</p>
-              <p className="text-xs text-muted-foreground">B2B Agricultural Network</p>
-            </div>
-          </div>
+            <Link href="/" className="flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#012843] text-sm font-black text-white">
+                AG
+              </div>
+              <div>
+                <p className="text-sm font-black tracking-[0.22em] text-[#012843]">AGRILINK</p>
+              </div>
+            </Link>
 
-            <nav className="hidden items-center gap-6 text-sm text-muted-foreground lg:flex">
-              <a href="#marketplace" className="transition-colors hover:text-foreground">{t.nav.marketplace}</a>
-              <a href="#features" className="transition-colors hover:text-foreground">{t.nav.features}</a>
-              <a href="#resources" className="transition-colors hover:text-foreground">{t.nav.resources}</a>
+            <nav className="hidden items-center gap-7 text-sm font-medium text-[#567087] lg:flex">
+              <a href="#value" className="transition-colors hover:text-[#012843]">{t.nav.value}</a>
+              <a href="#how" className="transition-colors hover:text-[#012843]">{t.nav.howItWorks}</a>
+              <a href="#preview" className="transition-colors hover:text-[#012843]">{t.nav.product}</a>
             </nav>
 
-          <div className="flex items-center gap-2 sm:gap-3">
-            <Link
-              href="/login"
-              className="rounded-xl border border-border bg-background px-4 py-2 text-sm font-semibold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-muted"
-            >
-              {t.nav.signIn}
-            </Link>
-            <Link
-              href="/register"
-              className="rounded-xl bg-gradient-to-br from-primary to-[#ff5d5d] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[0_12px_24px_rgba(255,49,49,0.3)] transition-all duration-300 hover:-translate-y-0.5"
-            >
-              {t.nav.register}
-            </Link>
-            <label className="hidden text-sm font-semibold text-muted-foreground sm:inline" htmlFor="language-selector">
-              {t.nav.language}
-            </label>
-            <select
-              id="language-selector"
-              value={language}
-              onChange={(e) => setLanguage(e.target.value as Lang)}
-              className="rounded-xl border border-input bg-background px-2 py-2 text-sm outline-none focus:ring-2 focus:ring-ring/40"
-            >
-              <option value="en">EN</option>
-              <option value="fr">FR</option>
-              <option value="ar">AR</option>
-            </select>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <select
+                id="language-selector"
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as Lang)}
+                className="rounded-xl border border-[#d2dce6] bg-white px-2 py-2 text-sm font-medium text-[#012843] outline-none focus:ring-2 focus:ring-[#012843]/20"
+                aria-label={t.nav.language}
+              >
+                <option value="en">EN</option>
+                <option value="fr">FR</option>
+                <option value="ar">AR</option>
+              </select>
+              <Link
+                href="/register"
+                className="inline-flex items-center rounded-xl bg-[#ff3131] px-4 py-2 text-sm font-semibold text-white shadow-[0_10px_20px_rgba(255,49,49,0.32)] transition hover:brightness-95"
+              >
+                {t.nav.register}
+              </Link>
+            </div>
           </div>
           </div>
         </header>
 
-        <div id="marketplace" className={`mt-12 grid items-start gap-8 lg:grid-cols-[1.1fr,0.9fr] ${rtl ? 'text-right' : 'text-left'}`}>
-          <div className="rounded-[20px] border border-border/80 bg-card/90 p-8 shadow-[0_20px_50px_rgba(1,40,67,0.14)] sm:p-11">
-            <span className="inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primary">
+        <div className="mx-auto w-full max-w-7xl px-6 pb-20 pt-16 sm:px-10 lg:px-14">
+          <div id="value" className={`max-w-3xl ${rtl ? 'text-right' : 'text-left'}`}>
+            <span className="inline-flex rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-white/90">
               {t.hero.badge}
             </span>
 
-            <h1 className="mt-5 text-4xl font-black leading-[1.05] text-foreground sm:text-6xl">
+            <h1 className="mt-5 text-4xl font-black leading-[1.05] text-white sm:text-6xl">
               {t.hero.title}
             </h1>
 
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
               {t.hero.subtitle}
             </p>
 
             <div className={`mt-8 flex flex-wrap gap-4 ${rtl ? 'justify-end' : 'justify-start'}`}>
               <Link
-                href="/dashboard"
-                className="rounded-xl bg-gradient-to-r from-primary to-[#ff5d5d] px-6 py-3 text-sm font-bold text-primary-foreground shadow-[0_16px_28px_rgba(255,49,49,0.3)] transition-all duration-300 hover:-translate-y-0.5"
+                href="/login"
+                className="rounded-xl bg-[#ff3131] px-6 py-3 text-sm font-bold text-white shadow-[0_16px_28px_rgba(255,49,49,0.35)] transition hover:-translate-y-0.5"
               >
                 {t.hero.ctaPrimary}
               </Link>
               <Link
                 href="/register"
-                className="rounded-xl border border-border bg-background px-6 py-3 text-sm font-bold text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-muted"
+                className="rounded-xl border border-white/35 bg-white/10 px-6 py-3 text-sm font-bold text-white transition hover:-translate-y-0.5 hover:bg-white/20"
               >
                 {t.hero.ctaSecondary}
               </Link>
             </div>
 
-            <div className={`mt-10 grid gap-3 sm:grid-cols-2 ${rtl ? 'text-right' : 'text-left'}`}>
+            <div id="how" className={`mt-10 grid gap-3 sm:grid-cols-3 ${rtl ? 'text-right' : 'text-left'}`}>
               {t.trust.map((item, index) => {
                 const Icon = metricIcons[index] || BadgeCheck;
                 return (
-                  <div key={item.label} className="card-premium flex items-center gap-3 rounded-2xl p-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div key={item.label} className="rounded-2xl border border-white/20 bg-white/12 p-4 backdrop-blur-sm">
+                    <div className="mb-2 flex h-9 w-9 items-center justify-center rounded-xl bg-white/15 text-white">
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="text-xl font-black">{item.value}</p>
-                      <p className="text-xs text-muted-foreground">{item.label}</p>
+                      <p className="text-2xl font-black text-white">{item.value}</p>
+                      <p className="text-xs text-white/75">{item.label}</p>
                     </div>
                   </div>
                 );
               })}
             </div>
           </div>
-
-          <aside className="relative min-h-[420px] rounded-[20px] border border-border bg-gradient-to-br from-[#012843] to-[#0c3b5f] p-6 text-white shadow-[0_20px_44px_rgba(1,40,67,0.34)]">
-            <div className="absolute inset-0 rounded-[20px] bg-[radial-gradient(circle_at_10%_10%,rgba(255,255,255,0.15),transparent_40%),radial-gradient(circle_at_90%_90%,rgba(255,49,49,0.2),transparent_45%)]" />
-            <div className="relative">
-              <p className="text-xs uppercase tracking-[0.2em] text-white/70">Live Marketplace View</p>
-              <h3 className="mt-2 text-2xl font-black">Operational Pulse</h3>
-
-              <div className="mt-6 grid gap-3">
-                {t.trust.map((item, index) => (
-                  <div
-                    key={item.label}
-                    className="glass-panel animate-float rounded-2xl p-4"
-                    style={{ animationDelay: `${index * 0.4}s` }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-white/70">{item.label}</span>
-                      <span className="h-2 w-2 rounded-full bg-[#ff3131]" />
-                    </div>
-                    <p className="mt-2 text-2xl font-black">{item.value}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-4 rounded-2xl border border-white/20 bg-white/10 p-4">
-                <p className="text-xs text-white/70">Verified partner activity</p>
-                <div className="mt-2 h-2 overflow-hidden rounded-full bg-white/15">
-                  <div className="h-full w-[78%] rounded-full bg-gradient-to-r from-[#ff3131] to-[#ff8a8a]" />
-                </div>
-              </div>
-            </div>
-          </aside>
         </div>
-
-        <section id="features" className={`mt-16 ${rtl ? 'text-right' : 'text-left'}`}>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Capabilities</p>
-          <h2 className="mt-2 text-3xl font-black text-foreground sm:text-4xl">{t.featuresTitle}</h2>
-          <p className="mt-3 max-w-2xl text-muted-foreground">{t.featuresSubtitle}</p>
-          <div className="mt-6 grid gap-5 md:grid-cols-3">
-            {t.features.map((feature, index) => {
-              const Icon = featureIcons[index] || Boxes;
-              return (
-              <article
-                key={feature.title}
-                className="card-premium group rounded-[20px] p-6 transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h3 className="text-base font-extrabold text-foreground">{feature.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{feature.description}</p>
-              </article>
-              );
-            })}
-          </div>
-        </section>
-
-        <footer id="resources" className="mt-16 overflow-hidden rounded-[20px] border border-[#174466] bg-[#012843] p-8 text-white sm:p-10">
-          <div className="grid gap-10 lg:grid-cols-[1.2fr,1fr]">
-            <div>
-              <h3 className="text-2xl font-black sm:text-3xl">{t.footerTitle}</h3>
-              <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-                {t.footer}
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/login" className="rounded-xl border border-white/25 px-4 py-2 text-sm font-semibold transition hover:bg-white/10">
-                  {t.nav.signIn}
-                </Link>
-                <Link href="/register" className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:opacity-90">
-                  {t.nav.register}
-                </Link>
-              </div>
-            </div>
-
-            <div className="grid gap-6 sm:grid-cols-2">
-              {t.footerColumns.map((column) => (
-                <div key={column.heading}>
-                  <h4 className="text-sm font-bold uppercase tracking-wide text-white/80">{column.heading}</h4>
-                  <ul className="mt-3 space-y-2 text-sm text-white/70">
-                    {column.links.map((item) => (
-                      <li key={item} className="transition hover:text-white">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </footer>
       </section>
+
+      <section id="preview" className="mx-auto w-full max-w-7xl px-6 py-16 sm:px-10 lg:px-14">
+        <div className={`mb-8 ${rtl ? 'text-right' : 'text-left'}`}>
+          <h2 className="text-3xl font-black text-[#012843] sm:text-4xl">{t.featuresTitle}</h2>
+          <p className="mt-2 max-w-2xl text-[#5f758a]">{t.featuresSubtitle}</p>
+        </div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {t.features.map((feature) => (
+            <article
+              key={feature.title}
+              className="group rounded-[20px] border border-[#d4e0ea] bg-white p-6 shadow-[0_14px_32px_rgba(1,40,67,0.08)] transition duration-300 hover:-translate-y-1"
+            >
+              <h3 className="text-lg font-extrabold text-[#012843]">{feature.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#637a8f]">{feature.description}</p>
+              <button className="mt-5 text-sm font-semibold text-[#ff3131] transition group-hover:translate-x-1">
+                {t.demo}
+                {' ->'}
+              </button>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <footer id="resources" className="bg-[#012843] px-6 py-14 text-white sm:px-10 lg:px-14">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[1.2fr,1fr]">
+          <div>
+            <h3 className="text-2xl font-black sm:text-3xl">{t.footerTitle}</h3>
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
+              {t.footer}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link href="/login" className="rounded-xl border border-white/25 px-4 py-2 text-sm font-semibold transition hover:bg-white/10">
+                {t.nav.signIn}
+              </Link>
+              <Link href="/register" className="rounded-xl bg-[#ff3131] px-4 py-2 text-sm font-semibold text-white transition hover:brightness-95">
+                {t.nav.register}
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            {t.footerColumns.map((column) => (
+              <div key={column.heading}>
+                <h4 className="text-sm font-bold uppercase tracking-wide text-white/80">{column.heading}</h4>
+                <ul className="mt-3 space-y-2 text-sm text-white/70">
+                  {column.links.map((item) => (
+                    <li key={item} className="transition hover:text-white">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
